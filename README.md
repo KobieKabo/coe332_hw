@@ -1,0 +1,1 @@
+Repository holds sub-directories for all homeworks to be completed for this semester. Additional README files will be added to each directory for futher information.
