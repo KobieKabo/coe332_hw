@@ -1,3 +1,6 @@
+# Name: Jakob Long
+# UTEID: Jrl4725
+
 # initializes word list
 words = []
 
