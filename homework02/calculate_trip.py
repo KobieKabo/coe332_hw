@@ -11,7 +11,6 @@ def calc_gcd(latitude_1: float, longitude_1: float, latitude_2: float, longitude
     d_sigma = math.acos( math.sin(lat1) * math.sin(lat2) + math.cos(lat1) * math.cos(lat2) * math.cos(abs(lon1-lon2)))
     return ( mars_radius * d_sigma )
 
-# Read in data from JSON file
 with open("meteorite_landing_sites.json", "r") as f:
     data = json.load(f)
 
@@ -26,7 +25,6 @@ total_time, total_distance = 0, 0
 
 # Iterate over each site
 for i, site in enumerate(data["sites"]):
-    # Calculate time and distance to next site
     time = calc_gcd(start_lat, start_lon, site["latitude"], site["longitude"]) / speed
     distance = calc_gcd(start_lat, start_lon, site["latitude"], site["longitude"])
     sample_time = 0
