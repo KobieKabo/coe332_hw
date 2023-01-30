@@ -14,13 +14,11 @@ def calc_gcd(latitude_1: float, longitude_1: float, latitude_2: float, longitude
 with open("meteorite_landing_sites.json", "r") as f:
     data = json.load(f)
 
-# Robot speed in km/hr
+# robot speed
 speed = 10
 
-# Starting coordinates
+# starting coords
 start_lat, start_lon = 16.0, 82.0
-
-# Total time and distance for the trip
 total_time, total_distance = 0, 0
 
 # Iterate over each site
