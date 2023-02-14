@@ -1,15 +1,11 @@
 # Homework 3: "The World Has Turned and Left Me Turbid" 
 
 ### Project Description:
-
-    This project uses different water samples and analyzes their quality, with an emphasis on the turbidity levels in order
-    to determine the safety level of the water. The analyze_water.py file contained within this directory pulls data down from 
-    https://raw.githubusercontent.com/wjallen/turbidity/main/turbidity_data.json, where it then takes the five most recent data samples
-    taken and determines if the water is below a safety threshold, and if it isn't it returns how long it will take until the water is safe once again. The test_analyze_water.py is a unit tester script that ensures everything is working correctly within the analyze_water.py file, with tests that check math, and ensuring the proper data types are being returned by the given functions.
+This project uses different water samples and analyzes their quality, with an emphasis on the turbidity levels in order to determine the safety level of the water. The analyze_water.py file contained within this directory pulls data down from https://raw.githubusercontent.com/wjallen/turbidity/main/turbidity_data.json, where it then takes the five most recent data samples taken and determines if the water is below a safety threshold, and if it isn't it returns how long it will take until the water is safe once again. The test_analyze_water.py is a unit tester script that ensures everything is working correctly within the analyze_water.py file, with tests that check math, and ensuring the proper data types are being returned by the given functions.
 
 #### Project Purpose:
-
-    The purpose of this project is to become familiar with working with API's via the python requests module, and unit testing. Additonally, to become more familiar with using docstrings when writing functions, and having properly documented code.
+The purpose of this project is to become familiar with working with API's via the python requests module, and unit testing. Additonally, to become more familiar with
+using docstrings when writing functions, and having properly documented code.
 
 ### Data:
 
@@ -34,7 +30,7 @@
     },
     ... etc
 ```
-
+       ```
 ### Scripts:
 
     'analyze_water.py':
