@@ -8,9 +8,7 @@ The purpose of this project is to become familiar with working with API's via th
 using docstrings when writing functions, and having properly documented code.
 
 ### Data:
-
-    Data used was again sourced from this url: https://raw.githubusercontent.com/wjallen/turbidity/main/turbidity_data.json, with a sample looking like:
-
+Data used was again sourced from this url: https://raw.githubusercontent.com/wjallen/turbidity/main/turbidity_data.json, with a sample looking like:
         ```
 {
   "turbidity_data": [
@@ -30,7 +28,6 @@ using docstrings when writing functions, and having properly documented code.
     },
     ... etc
 ```
-       ```
 ### Scripts:
 
     'analyze_water.py':
