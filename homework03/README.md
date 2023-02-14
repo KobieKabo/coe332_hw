@@ -8,8 +8,8 @@ The purpose of this project is to become familiar with working with API's via th
 using docstrings when writing functions, and having properly documented code.
 
 ### Data:
-Data used was again sourced from this url: https://raw.githubusercontent.com/wjallen/turbidity/main/turbidity_data.json, with a sample looking like:
-        ```
+Data used was again sourced from this url: https://raw.githubusercontent.com/wjallen/turbidity/main/turbidity_data.json, with a sample looking like
+```
 {
   "turbidity_data": [
     {
@@ -27,6 +27,7 @@ Data used was again sourced from this url: https://raw.githubusercontent.com/wja
       "analyzed_by": "C. Milligan"
     },
     ... etc
+```
 ### Scripts:
 'analyze_water.py':
         Pulls data down from the url listed above twice, and creates a dictionary from the given data. This dictionary is then used to perform multiple functions, such as compute the average turbidity of the five most recent data samples taken. This average is then compared to a constant safety threshold, where if the threshold is exceeded a time value is computed to determine how long until the water would be safe once more.
@@ -44,26 +45,26 @@ These will both allow the unit test script, and data collecting script to work a
 
 ### Running the code & Testing:
 After cloning the repository, move into the homework03 directory. From there on the command line all you need to do is type the following:
-    ``` 
-    $ pytest test_analyze_water.py
-    ```
-    This should have an output of:
-    ```
-    ============================= test session starts ================================
-                    platform linux -- Python 3.8.10, pytest-7.2.1, pluggy-1.0.0
-                    rootdir: /home/kebabo/coe332_hw/homework03
-                    collected 4 items                                                                                                                                         
+``` 
+$ pytest test_analyze_water.py
+```
+This should have an output of:
+```
+============================= test session starts ================================
+platform linux -- Python 3.8.10, pytest-7.2.1, pluggy-1.0.0
+rootdir: /home/kebabo/coe332_hw/homework03
+collected 4 items                                                                                                                                         
 
-                    test_analyze_waterpy ....                                                                                                                                                                                               [100%]
-================================== 4 passed in 0.12s =================================
-    ```
-    Then after ensuring the analyze_water.py function is working you simply do:
-    ```
-    $ python3 analyze_water.py
-    ```
-    yielding an output such as:
-    ```
-    Average turbidity based on most recent five measurements = 1.15388 NTU.
-    The current turbidity exceeds the safety threshold.
-    Minimum time required to return below a safe threshold 7.085 hours.
-    ```
+test_analyze_waterpy ....                                                                                                                                                                                               [100%]
+============================== 4 passed in 0.12s =================================
+```
+Then after ensuring the analyze_water.py function is working you simply do:
+```
+$ python3 analyze_water.py
+```
+yielding an output such as:
+```
+Average turbidity based on most recent five measurements = 1.15388 NTU.
+The current turbidity exceeds the safety threshold.
+Minimum time required to return below a safe threshold 7.085 hours.
+```
