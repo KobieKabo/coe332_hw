@@ -28,33 +28,25 @@ Data used was again sourced from this url: https://raw.githubusercontent.com/wja
     },
     ... etc
 ### Scripts:
+'analyze_water.py':
+        Pulls data down from the url listed above twice, and creates a dictionary from the given data. This dictionary is then used to perform multiple functions, such as compute the average turbidity of the five most recent data samples taken. This average is then compared to a constant safety threshold, where if the threshold is exceeded a time value is computed to determine how long until the water would be safe once more.
 
-    'analyze_water.py':
-        Pulls data down from the url listed above twice, and creates a dictionary from the given data. This dictionary is then used
-        to perform multiple functions, such as compute the average turbidity of the five most recent data samples taken. This average is then compared to a constant safety threshold, where if the threshold is exceeded a time value is computed to determine how long
-        until the water would be safe once more.
-
-    'test_analyze_water.py':
+'test_analyze_water.py':
         Applies simple unit tests, to each function within analyze_water.py to ensure everything is working as intended.
 
 ### Installation:
-
-    Ensure both the pytest, and requests module are installed, this is done by using the following commands while on the command line within a unix shell.
-
-    pip3 install --user requests
-    &
-    pip3 install --user pytest
-
-    These will both allow the unit test script, and data collecting script to work as intended.
+Ensure both the pytest, and requests module are installed, this is done by using the following commands while on the command line within a unix shell.
+```
+pip3 install --user requests
+pip3 install --user pytest
+```
+These will both allow the unit test script, and data collecting script to work as intended.
 
 ### Running the code & Testing:
-
-    After cloning the repository, move into the homework03 directory. From there on the command line all you need to do is type the following:
-
+After cloning the repository, move into the homework03 directory. From there on the command line all you need to do is type the following:
     ``` 
     $ pytest test_analyze_water.py
     ```
-
     This should have an output of:
     ```
     ============================= test session starts ================================
@@ -65,7 +57,6 @@ Data used was again sourced from this url: https://raw.githubusercontent.com/wja
                     test_analyze_waterpy ....                                                                                                                                                                                               [100%]
 ================================== 4 passed in 0.12s =================================
     ```
-
     Then after ensuring the analyze_water.py function is working you simply do:
     ```
     $ python3 analyze_water.py
