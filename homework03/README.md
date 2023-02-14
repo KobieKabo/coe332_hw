@@ -55,7 +55,8 @@ platform linux -- Python 3.8.10, pytest-7.2.1, pluggy-1.0.0
 rootdir: /home/kebabo/coe332_hw/homework03
 collected 4 items                                                                                                                                         
 
-test_analyze_waterpy ....                                                                                                                                                                                               [100%]
+test_analyze_waterpy
+                                                                [100%]
 ============================== 4 passed in 0.12s =================================
 ```
 Then after ensuring the analyze_water.py function is working you simply do:
