@@ -21,9 +21,9 @@ Depending on the route used different information is returned.
 | ------------- |:-------------:| 
 | `/`     | the full data set | 
 | `/epochs`       | all epochs in the data set      |
-| `/epochs/<int:epoch>`  | the data (state vectors) associated with the specified epoch      |
-| `/epochs/<int:epoch>/position`  | the positional coordinates of the specified epoch     |
-| `/epochs/<int:epoch>/speed`  | the speed of the specified epoch      |
+| `/epochs/<epoch>`  | the data (state vectors) associated with the specified epoch      |
+| `/epochs/<epoch>/position`  | the positional coordinates of the specified epoch     |
+| `/epochs/<epoch>/speed`  | the speed of the specified epoch      |
 
 ### Usage & Installation:
 
@@ -48,7 +48,7 @@ This starts the flask application, and queries are now accessible using the API.
 Now from a new terminal window that's within the same machine you're able to make queries via the command line. Using the routes from above we can begin to get results
 like the following:
 
-Route One: '/'
+Route One: `/`
 ```
 curl localhost:5000/
 {
@@ -83,7 +83,7 @@ It should also be noted that on your other terminal you should be receiving mess
 ```
 127.0.0.1 - - [21/Feb/2023 05:31:34] "GET / HTTP/1.1" 200 -
 ```
-Now, for Route Two: '/epochs'
+Now, for Route Two: `/epochs`
 ```
 curl localhost:5000/epochs
 [
@@ -99,7 +99,7 @@ curl localhost:5000/epochs
   ...
 ]
 ```
-Route Three: '/epochs/<int:epoch>'
+Route Three: `/epochs/<epoch>`
 ```
 curl localhost:5000/epoch/1
 {
@@ -130,16 +130,20 @@ curl localhost:5000/epoch/1
   }
 }
 ```
-Route Four: '/epochs/<int:epoch>/position'
+For the previous route & the routes that follow, if anything but an integer is used for <epoch> you will receive the following message:
 ```
-curl localhost:5000/epoch/position
+Bad input. Please input an integer value.
+```
+Route Four: `/epochs/<epoch>/position`
+```
+curl localhost:5000/epoch/1/position
 {
   "X": "-5998.4652356788401",
   "Y": "391.26194859011099",
   "Z": "-3164.26047476555"
 }
 ```
-Route Five: '/epochs/<int:epoch>/speed'
+Route Five: `/epochs/<epoch>/speed`
 ```
 curl localhost:5000/epoch/1/speed
 {
