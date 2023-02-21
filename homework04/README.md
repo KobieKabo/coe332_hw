@@ -25,6 +25,8 @@ Depending on the route used different information is returned.
 | `/epochs/<epoch>/position`  | the positional coordinates of the specified epoch     |
 | `/epochs/<epoch>/speed`  | the speed of the specified epoch      |
 
+Where `<epoch>` is any integer value. If a non-integer is used, you'll receive an error message.
+
 ### Usage & Installation:
 
 To begin, first clone the repo & ensure that the xmltodict, flask and requests modules are installed as well.
@@ -45,8 +47,7 @@ flask --app iss_tracker --debug run
 ```
 This starts the flask application, and queries are now accessible using the API.
 
-Now from a new terminal window that's within the same machine you're able to make queries via the command line. Using the routes from above we can begin to get results
-like the following:
+Now from a new terminal window that's within the same machine you're able to make queries via the command line. Using curl requests & the routes from above we can begin to get results like the following:
 
 Route One: `/`
 ```
@@ -132,7 +133,7 @@ curl localhost:5000/epoch/1
 ```
 For the previous route & the routes that follow, if anything but an integer is used for <epoch> you will receive the following message:
 ```
-Bad input. Please input an integer value.
+Bad input. Please input an integer value between 1 and 5882.
 ```
 Route Four: `/epochs/<epoch>/position`
 ```
@@ -150,3 +151,7 @@ curl localhost:5000/epoch/1/speed
   "Speed": 7.662046317290625
 }
 ```
+
+### Credits:
+
+For assistance on formatting, I took inspiration from Jacksons' README.md found at the following URL https://github.com/jthet/my-coe332-hws/blob/main/homework04/README.md
