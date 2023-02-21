@@ -52,7 +52,7 @@ def epochs_Only() -> list:
         epochs.append(data['EPOCH'])
     return epochs
 
-@app.route('/epochs/<int:epoch>', methods = ['GET'])
+@app.route('/epochs/<epoch>', methods = ['GET'])
 def get_Epoch_Entry(epoch) -> dict:
     """
     Function takes in a specific epoch, from the list created in epochs_Only. This epoch is specified
@@ -65,10 +65,12 @@ def get_Epoch_Entry(epoch) -> dict:
     Returns:
         data (dict): returns a dictionary that holds the data from the specific epoch identified earlier.
     """
+    if not epoch.isnumeric():
+        return "Bad input. Please input an integer value.\n"
     data = get_nasa_data()
     return data[int(epoch)]
 
-@app.route('/epochs/<int:epoch>/position', methods = ['GET'])
+@app.route('/epochs/<epoch>/position', methods = ['GET'])
 def get_Epoch_Position(epoch) -> dict:
     """
     Function takes in a specific epoch, from the list created in epochs_Only. This epoch is specified
@@ -85,7 +87,7 @@ def get_Epoch_Position(epoch) -> dict:
     epoch_Data = get_Epoch_Entry(epoch)
     return {'X': epoch_Data['X']['#text'], 'Y': epoch_Data['Y']['#text'], 'Z': epoch_Data['Z']['#text']}
 
-@app.route('/epochs/<int:epoch>/speed', methods = ['GET'])
+@app.route('/epochs/<epoch>/speed', methods = ['GET'])
 def get_Epoch_Speed(epoch) -> dict:
     """
     Function takes in a specific epoch, from the list created in epochs_Only. This epoch is specified by
