@@ -66,7 +66,7 @@ def get_Epoch_Entry(epoch) -> dict:
         data (dict): returns a dictionary that holds the data from the specific epoch identified earlier.
     """
     if not epoch.isnumeric():
-        return "Bad input. Please input an integer value.\n"
+        return "Bad input. Please input an integer value between 1 and 5882.\n"
     data = get_nasa_data()
     return data[int(epoch)]
 
