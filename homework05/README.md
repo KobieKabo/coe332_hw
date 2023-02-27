@@ -92,6 +92,8 @@ To close the container.
 
 Now from a new terminal window that's within the same machine you're able to make queries via the command line. Using curl requests & the routes from above we can begin to get results like the following:
 
+# END NOTE:
+
 Route One: `/`
 ```
 curl 127.0.0.1:5000/
