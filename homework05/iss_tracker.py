@@ -184,7 +184,7 @@ def get_Epoch_Speed(epoch) -> dict:
     speed = math.sqrt(x_Speed**2 + y_Speed**2 + z_Speed**2)
     return {'EPOCH': epoch_Data['EPOCH'],'Speed' : speed}
 
-@app.route('/post-data', methods = ['GET'])
+@app.route('/post-data', methods = ['POST'])
 def post_nasa_data() -> str:
     """
     Restores data to the dictionary
@@ -217,7 +217,7 @@ def delete_nasa_data() -> str:
         data_update (str): Returns status of the data
     """
     global data
-    data.clear()
+    data = {}
     
     data_update = 'Data has been deleted.\n'
     return data_update

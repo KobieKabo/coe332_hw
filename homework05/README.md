@@ -225,7 +225,7 @@ Data has been deleted.
 ```
 Route Eight: `/post-data`
 ```
-curl 127.0.0.1:5000/post-data
+curl -X POST 127.0.0.1:5000/post-data
 ...
 Data has been updated.
 ```
