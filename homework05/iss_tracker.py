@@ -19,6 +19,7 @@ def get_nasa_data() -> dict:
     """
     url = 'https://nasa-public-data.s3.amazonaws.com/iss-coords/current/ISS_OEM/ISS.OEM_J2K_EPH.xml'
     r = requests.get(url)
+    global data
     data = xmltodict.parse(r.content)
 
     return data['ndm']['oem']['body']['segment']['data']['stateVector']
