@@ -30,22 +30,45 @@ Depending on the route used different information is returned.
 Where `<epoch>` is any integer value. If a non-integer is used, you'll receive an error message.
 
 ### Usage & Installation:
+To properly use this program you'll need to have docker, so that you the user can use the image already created, or make your own.
 
-To begin, first clone the repo & ensure that the xmltodict, flask and requests modules are installed as well.
+# Method 1: Using the image already generated
+To use the image that I've already created you simply need to pull the docker file from dockerhub, and then run it.
+As such you'll need to do the following:
 
-To double check do this for each module:
 ```
-pip3 install --user xmltodict
-
-pip3 install --user requests
-
-pip3 install --user flask
+docker pull kobiekabo/iss_tracker:1.0
+...
+...
+...
+docker build -t <yourdockerusername>/<fileName>:<version>
 ```
-With the necessary modules installed, and the repo cloned the iss_tracker flask application can now be run.
+Doing it this way constructs the image & allows the docker image to be run, which will immediately start the flask application.
 
-This is accomplished by doing the following:
+# Method 2: Creating your own image
+To use this method, the Dockerfile needs to be in the current working directory for the commands to work properly.
+As such you'll need to use almost the exact same command as above:
 ```
-flask --app iss_tracker --debug run
+docker build -t <yourdockerusername>/<fileName>:<version> .
+```
+This will then create an image based on the Dockerfile in the current directory.
+
+The image built can then be checked with:
+```
+docker images
+...
+REPOSITORY              TAG       IMAGE ID       CREATED         SIZE
+kobiekabo/iss_tracker   1.0       1932e3be3921   2 hours ago     897MB
+...
+```
+Now, regardless of the method used it's time to run the image!
+This is done with the following command:
+```
+docker run -it --rm -p 5000:5000 <yourdockerusername>/<fileName>:<version>
+```
+if you're using the image I've created then the command looks like:
+```
+docker run -it --rm -p 5000:5000 kobiekabo/iss_tracker:1.0
 ```
 This starts the flask application, and queries are now accessible using the API.
 
