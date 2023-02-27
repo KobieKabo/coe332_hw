@@ -19,10 +19,11 @@ def get_nasa_data() -> dict:
     """
     url = 'https://nasa-public-data.s3.amazonaws.com/iss-coords/current/ISS_OEM/ISS.OEM_J2K_EPH.xml'
     r = requests.get(url)
-    global data
     data = xmltodict.parse(r.content)
 
     return data['ndm']['oem']['body']['segment']['data']['stateVector']
+
+data = get_nasa_data()
 
 @app.route('/help', methods = ['GET'])
 def help_function() -> str:
@@ -60,7 +61,6 @@ def get_All_Data() -> dict:
     Returns:
         data (dict): python dictionary of all Epochs & the associated data.
     """
-    data = get_nasa_data()
     return data
 
 @app.route('/epochs', methods = ['GET'])
@@ -79,7 +79,7 @@ def epochs_Only() -> list:
     """
     epochs = []
     for d in data:
-        epochs.append(data['EPOCH'])
+        epochs.append(d['EPOCH'])
 
     try:
         offset = int(request.args.get('offset',0))
@@ -224,8 +224,6 @@ def delete_nasa_data() -> str:
 
     return data_update
 
-data = get_nasa_data()
-data_copy = data
 
 if __name__ == '__main__':
     app.run(debug =True, host = '0.0.0.0')
