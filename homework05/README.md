@@ -41,13 +41,13 @@ docker pull kobiekabo/iss_tracker:1.0
 ...
 ...
 ...
-docker build -t <yourdockerusername>/<fileName>:<version>
+docker run -it --rm -p 5000:5000 kobiekabo/iss_tracker:1.0
 ```
 Doing it this way constructs the image & allows the docker image to be run, which will immediately start the flask application.
 
 # Method 2: Creating your own image
 To use this method, the Dockerfile needs to be in the current working directory for the commands to work properly.
-As such you'll need to use almost the exact same command as above:
+As such you'll need to use the docker build command as follows:
 ```
 docker build -t <yourdockerusername>/<fileName>:<version> .
 ```
@@ -72,11 +72,29 @@ docker run -it --rm -p 5000:5000 kobiekabo/iss_tracker:1.0
 ```
 This starts the flask application, and queries are now accessible using the API.
 
+# NOTE:
+Ensure that the --rm option is not forgotten! Otherwise you'll have to stop the docker container manually.
+If you do the --rm option you'll receive an error similar to the following:
+```
+Error response from daemon: driver failed programming external connectivity on endpoint magical_kare (e109f1045da2d2d1d937e2d7079cd2b0e3b1951a56e27fa9f24eec6b7fcb5fbd): Bind for 0.0.0.0:5000 failed: port is already allocated
+```
+This can be easily fixed by using:
+```
+docker ps
+```
+This allows you to check the container's unique id which is necessary to close the container.
+You then use:
+```
+docker stop <container ID>
+```
+To close the container.
+
 Now from a new terminal window that's within the same machine you're able to make queries via the command line. Using curl requests & the routes from above we can begin to get results like the following:
 
 Route One: `/`
 ```
 curl 127.0.0.1:5000/
+...
 {
     "EPOCH": "2023-063T12:00:00.000Z",
     "X": {
@@ -112,6 +130,7 @@ It should also be noted that on your other terminal you should be receiving mess
 Now, for Route Two: `/epochs`
 ```
 curl 127.0.0.1:5000/epochs
+...
 [
   "2023-048T12:00:00.000Z",
   "2023-048T12:04:00.000Z",
@@ -125,9 +144,10 @@ curl 127.0.0.1:5000/epochs
   ...
 ]
 ```
-Route Three: `/epochs/<epoch>`
+Route three: `/epochs/<epoch>`
 ```
-curl 127.0.0.1:5000/epoch/1
+curl 127.0.0.1:5000/epochs/1
+...
 {
   "EPOCH": "2023-048T12:04:00.000Z",
   "X": {
@@ -156,13 +176,10 @@ curl 127.0.0.1:5000/epoch/1
   }
 }
 ```
-For the previous route & the routes that follow, if anything but an integer is used for <epoch> you will receive the following message:
-```
-Bad input. Please input an integer value between 1 and 5882.
-```
 Route Four: `/epochs/<epoch>/position`
 ```
-curl 127.0.0.1:5000/epoch/1/position
+curl 127.0.0.1:5000/epochs/1/position
+...
 {
   "X": "-5998.4652356788401",
   "Y": "391.26194859011099",
@@ -172,7 +189,38 @@ curl 127.0.0.1:5000/epoch/1/position
 Route Five: `/epochs/<epoch>/speed`
 ```
 curl 127.0.0.1:5000/epoch/1/speed
+...
 {
   "Speed": 7.662046317290625
 }
+```
+Route Six: `/help`
+```
+curl 127.0.0.1:5000/help
+...
+Route & Function definitions for the flask app:
+help_function:
+
+    Function returns a help message with all routes, what they do, & how to properly use them.
+
+    Route Used: '/help'
+
+    Args:
+        None
+
+    Returns:
+        help_statements (str) : short explanation of all of the functions & routes.
+...
+```
+Route Seven: `/delete-data`
+```
+curl -X DELETE 127.0.0.1:5000/delete-data
+...
+Data has been deleted.
+```
+Route Eight: `/post-data`
+```
+curl 127.0.0.1:5000/post-data
+...
+Data has been updated.
 ```
