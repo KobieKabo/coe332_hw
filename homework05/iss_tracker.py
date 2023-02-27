@@ -45,8 +45,7 @@ def help_function() -> str:
     for functions in function_list:
         help_statements = help_statements + f'{functions}:\n' + eval(functions).__doc__+'\n\n'
 
-    return help_statements
-    
+    return help_statements 
 
 @app.route('/', methods = ['GET'])
 def get_All_Data() -> dict:
@@ -219,9 +218,8 @@ def delete_nasa_data() -> str:
     """
     global data
     data.clear()
-
+    
     data_update = 'Data has been deleted.\n'
-
     return data_update
 
 
