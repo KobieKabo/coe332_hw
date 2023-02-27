@@ -53,7 +53,7 @@ Now from a new terminal window that's within the same machine you're able to mak
 
 Route One: `/`
 ```
-curl localhost:5000/
+curl 127.0.0.1:5000/
 {
     "EPOCH": "2023-063T12:00:00.000Z",
     "X": {
@@ -88,7 +88,7 @@ It should also be noted that on your other terminal you should be receiving mess
 ```
 Now, for Route Two: `/epochs`
 ```
-curl localhost:5000/epochs
+curl 127.0.0.1:5000/epochs
 [
   "2023-048T12:00:00.000Z",
   "2023-048T12:04:00.000Z",
@@ -104,7 +104,7 @@ curl localhost:5000/epochs
 ```
 Route Three: `/epochs/<epoch>`
 ```
-curl localhost:5000/epoch/1
+curl 127.0.0.1:5000/epoch/1
 {
   "EPOCH": "2023-048T12:04:00.000Z",
   "X": {
@@ -139,7 +139,7 @@ Bad input. Please input an integer value between 1 and 5882.
 ```
 Route Four: `/epochs/<epoch>/position`
 ```
-curl localhost:5000/epoch/1/position
+curl 127.0.0.1:5000/epoch/1/position
 {
   "X": "-5998.4652356788401",
   "Y": "391.26194859011099",
@@ -148,12 +148,8 @@ curl localhost:5000/epoch/1/position
 ```
 Route Five: `/epochs/<epoch>/speed`
 ```
-curl localhost:5000/epoch/1/speed
+curl 127.0.0.1:5000/epoch/1/speed
 {
   "Speed": 7.662046317290625
 }
 ```
-
-### Credits:
-
-For assistance on formatting, I took inspiration from Jacksons' README.md found at the following URL https://github.com/jthet/my-coe332-hws/blob/main/homework04/README.md
