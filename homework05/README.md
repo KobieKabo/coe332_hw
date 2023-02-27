@@ -76,8 +76,8 @@ This starts the flask application, and queries are now accessible using the API.
 Ensure that the --rm option is not forgotten! Otherwise you'll have to stop the docker container manually.
 If you do the --rm option you'll receive an error similar to the following:
 ```
-Error response from daemon: driver failed programming external connectivity on endpoint
-magical_kare (e109f1045da2d2d1d937e2d7079cd2b0e3b1951a56e27fa9f24eec6b7fcb5fbd): Bind for 0.0.0.0:5000 failed: port is already allocated
+Error response from daemon: driver failed programming external connectivity on endpoint magical_kare 
+(e109f1045da2d2d1d937e2d7079cd2b0e3b1951a56e27fa9f24eec6b7fcb5fbd): Bind for 0.0.0.0:5000 failed: port is already allocated
 ```
 This can be easily fixed by using:
 ```
