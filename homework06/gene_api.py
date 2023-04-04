@@ -1,6 +1,8 @@
 import json
 import redis
 import requests
+import matplotlib.pyplot as plt
+import numpy as np
 from flask import Flask, request
 
 app = Flask(__name__)
@@ -95,6 +97,29 @@ def get_hgnc_data(hgnc_id) -> dict:
 
     return 'The given hgnc_id did not have a match. Please try another.\n'
 
+@app.route('/plot', methods = ['GET'])
+def get_sine_plot():
+    """
+    Returns a simple sine plot & saves the image to the redis db
+
+    Args: 
+        none
+
+    Returns:
+        A plot png to the redis db
+    """
+    x = np.linspace(0, 2*np.pi, 50)
+    plt.plot(x, np.sin(x),'r-x', label='Sin(x)')
+    plt.legend()
+    plt.xlabel('Rads')
+    plt.ylabel('Amplitude')
+    plt.title('Sine Wave')
+
+    plt.savefig('my_sinewave.png')
+    
+    sineFigure_bytes = open('/tmp/my_sinewave.png','rb').read()
+
+    rd.set('key',sineFigure_bytes)
 
 if __name__ == '__main__':
     app.run(debug = True, host = '0.0.0.0')
