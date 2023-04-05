@@ -48,7 +48,7 @@ def handle_data():
 
         for item in gene_data['response']['docs']:
             key = f'{item[hgnc_id]}'
-            rd.hset(key, mapping = item)
+            rd.set(key, json.dumps(item))
         return 'Data has been posted.\n'
 
     elif request.method == 'GET':
