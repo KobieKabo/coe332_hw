@@ -7,7 +7,7 @@ metadata:
     username: kebabo
     env: test
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: kebabo-test-flask
@@ -24,6 +24,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: kebabo-test-redis-service
-              value: kebabo-test-redis-service
+              value: 10.233.8.93
           ports:
-            - containerPort: 5000
+          - name: http
+            containerPort: 5000
