@@ -1,28 +1,38 @@
 ---
- apiVersion: apps/v1
- kind: Deployment
- metadata:
-   name: kebabo-test-deployment
-   labels:
-     app: kebabo-test-redis
- spec:
-   replicas: 1
-   selector:
-     matchLabels:
-       app: kebabo-test-redis
-   template:
-     metadata:
-       labels:
-         app: kebabo-test-redis
-     spec:
-       containers:
-         - name: kebabo-containers
-           image: redis:7
-           command:
-           volumeMounts:
-           - name: test-kebabo-redis
-             mountPath: "/data"
-       volumes:
-       - name: kebabo-test
-         persistentVolumeClaim:
-           claimName: kebabo-test
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kebabo-test-redis-deployment
+  labels:  
+    username: kebabo
+    env: test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      username: kebabo
+      env: test
+  template:
+    metadata:
+      labels:
+        app: kebabo-test-redis
+        username: kebabo
+        env: test
+    spec:
+      containers:
+        - name: redis
+          imagePullPolicy: Always
+          image: redis:7
+          env:
+          - name: FLASK_APP
+            value: "gene_api.py"
+          ports:
+          - name: http
+            containerPort: 6379
+          volumeMounts:
+          - name: redis-data
+            mountPath: /data
+      volumes:
+        - name: redis-data
+          persistentVolumeClaim:
+            claimName: kebabo-test-redis-pvc
