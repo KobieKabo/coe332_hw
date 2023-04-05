@@ -18,7 +18,7 @@ spec:
       containers:
         - name: kebabo-test-flask-container
           imagePullPolicy: Always
-          image: kebabo/gene_api:1.0
+          image: kobiekabo/gene_api:1.0
           env:
           - name: REDIS_IP
             value: "10.233.41.192" #redis service ip address
