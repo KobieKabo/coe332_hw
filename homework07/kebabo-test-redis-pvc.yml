@@ -3,7 +3,6 @@
  kind: PersistentVolumeClaim
  metadata:
    name: test-kebabo-redis
-   labels:
  spec:
    accessModes:
      - ReadWriteOnce

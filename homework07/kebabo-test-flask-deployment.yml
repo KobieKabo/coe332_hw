@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kebabo-test-deployment
+  labels:
+    app: kebabo-test-flask
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kebabo-test-flask
+  template:
+    metadata:
+      labels:
+        app: kebabo-test-flask
+    spec:
+      containers:
+        - name: kebabo-test-flask-container
+          imagePullPolicy: Always
+          image: kebabo/gene_api:1.0
+          env:
+          - name: REDIS_IP
+            value: "10.233.41.192" #redis service ip address
+          ports:
+          - name: http
+            containerPort: 5000

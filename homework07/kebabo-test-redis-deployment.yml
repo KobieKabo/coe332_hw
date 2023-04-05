@@ -2,27 +2,27 @@
  apiVersion: apps/v1
  kind: Deployment
  metadata:
-   name: test-kebabo-redis-pvc-deployment
+   name: test-kebabo-deployment
    labels:
-     app: test-kebabo-redis-pvc-app
+     app: kebabo-test-redis
  spec:
    replicas: 1
    selector:
      matchLabels:
-       app: test-kebabo-redis-pvc-app
+       app: kebabo-test-redis
    template:
      metadata:
        labels:
-         app: test-kebabo-redis-pvc-app 
+         app: kebabo-test-redis
      spec:
        containers:
-         - name: redistest
+         - name: kebabo-containers
            image: redis:7
-           command: ['sh', '-c', 'echo "Hello, Kubernetes!" >> /data/out.txt && sleep 3600']
+           command:
            volumeMounts:
            - name: test-kebabo-redis
              mountPath: "/data"
        volumes:
-       - name: test-kebabo-redis
+       - name: kebabo-test
          persistentVolumeClaim:
-           claimName: test-kebabo-redis
+           claimName: kebabo-test

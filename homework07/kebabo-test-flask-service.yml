@@ -2,12 +2,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: test-kebabo-service
+  name: kebabo-flask-service
 spec:
   type: ClusterIP
-  selector: 
-    app: kebabo-test 
+  selector:
+    app: kebaboflask
   ports:
-  - name: kebabo-test
+  - name: kebaboflask
     port: 5000
     targetPort: 5000
