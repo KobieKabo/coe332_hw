@@ -15,7 +15,7 @@ def get_redis():
 
     Returns: A redis client
     """
-    return redis.Redis(host = 'kebabo-test-redis-service', port=6379, db=0)
+    return redis.Redis(host = 'redis-db', port=6379, db=0)
 
 rd = get_redis()
 
