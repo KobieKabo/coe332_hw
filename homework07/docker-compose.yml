@@ -14,7 +14,7 @@ services:
             dockerfile: ./Dockerfile
         depends_on:
             - redis-db
-        image: kobiekabo/gene_api:1.0
+        image: kobiekabo/gene_api:hw7-1.0
         ports:
             - 5000:5000
         volumes:
