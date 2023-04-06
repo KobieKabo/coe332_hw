@@ -30,6 +30,7 @@ As such here are the following routes used in the aplication:
 <hgnc_id> is a string variable that has the following shape: HGNC:123, where 123 can be any unique ID value as given from the HGNC.
 
 `Dockerfile`: Holds the commands that allow the docker image associated with gene_api, to build the container when ran
+
 `docker-compose.yml`: YAML script controlling the containerization and port destination of the flask & redis applications
 
 All other files relate to Kubernetes and information about them can be found in the Kubernetes section.
