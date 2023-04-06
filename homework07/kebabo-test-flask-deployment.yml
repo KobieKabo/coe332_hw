@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kebabo-test-flask-deployment
+  labels:
+    app: kebabo-test-flask-deployment
+    username: kebabo
+    env: test
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kebabo-test-flask-deployment
+      username: kebabo
+      env: test
+  template:
+    metadata:
+      name: kebabo-test-flask-deployment
+      labels:
+        app: kebabo-test-flask-deployment
+        username: kebabo
+        env: test
+    spec:
+      containers:
+        - name: kebabo-test-flask-deployment
+          imagePullPolicy: Always
+          image: kobiekabo/gene_api:hw7-1.0
+          env:
+            - name: kebabo-test-redis-service
+              value: kebabo-test-redis-service
+          ports:
+            - containerPort: 6379
