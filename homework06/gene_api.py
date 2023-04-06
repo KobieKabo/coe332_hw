@@ -15,7 +15,7 @@ def get_redis():
 
     Returns: A redis client
     """
-    return redis.Redis(host = 'redis-db', port=6379, db=0, decode_responses = True)
+    return redis.Redis(host = 'kebabo-test-redis-service', port=6379, db=0)
 
 rd = get_redis()
 
@@ -36,27 +36,26 @@ def handle_data():
         Post: A string declaring the data as posted
         Delete: A string declaring the data as deleted
     """
-    global rd
 
-    if request.method == 'DELETE':
-        rd.flushdb()
-        return 'Data has been deleted.\n'
-    
-    elif request.method == 'POST':
-        r = requests.get(url = 'https://ftp.ebi.ac.uk/pub/databases/genenames/hgnc/json/hgnc_complete_set.json')
-        gene_data = r.json()
-
-        for item in gene_data['response']['docs']:
-            key = f'{item[hgnc_id]}'
-            rd.hset(key, mapping = item)
-        return 'Data has been posted.\n'
-
-    elif request.method == 'GET':
-        data_list = []
+    if request.method == 'GET':
+        output_list = []
         for item in rd.keys():
-            data_list.append(rd.hgetall(item))
-        return data_list
-    
+            value = rd.get(item).decode('utf-8')
+            if value is not None and value.strip():
+                output_list.append(json.loads(value))
+        return output_list
+
+    elif request.method == 'POST':
+        response = requests.get(url= 'https://ftp.ebi.ac.uk/pub/databases/genenames/hgnc/json/hgnc_complete_set.json')
+        for item in response.json()['response']['docs']:
+            key = f'{item["hgnc_id"]}'
+            rd.set(key, json.dumps(item))
+        return 'Data has been posted\n'
+
+    elif request.method == 'DELETE':
+        rd.flushdb()
+        return f'Data has been deleted.\n'
+
     else:
         return 'An incorrect method was provided. Please use POST, GET or DELETE.\n'
 
@@ -72,11 +71,12 @@ def get_all_hgncID() -> list:
         List of the hgnc_id's within the dataset    
     """
 
-    geneIDs = []
+    gene_IDS = []
 
     for key in rd.keys():
-        geneIDs.append(key)
-    return geneIDs
+        key = key.decode('utf-8')
+        gene_IDS.append(key)
+    return gene_IDS
 
 @app.route('/genes.<hgnc_id>', methods = ['GET'])
 def get_hgnc_data(hgnc_id) -> dict:
@@ -91,8 +91,8 @@ def get_hgnc_data(hgnc_id) -> dict:
     if len(rd.keys()) == 0:
         return 'Database is empty. please re-post the data.\n'
     
-    for key in rd.keys():
-        if str(key) == str(hgnc_id):
+     for key in rd.keys():
+        if key.decode('utf-8') == hgnc_id:
             return json.loads(rd.get(key))
 
     return 'The given hgnc_id did not have a match. Please try another.\n'
