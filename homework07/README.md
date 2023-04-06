@@ -1,24 +1,37 @@
-# HW 07: Containerized Flask Application for HGNC Human Genome Data Using Redis Database
-## Purpose
-Currently the non-profit Humand Genome Organization (HUGO) which oversees the HUGO Gene Nomenclature Commmittee (HGNC) has approved almost 43,000 symbols (genes). It is important that there are standardize names for genes to minimize confusion and make it much easier to work with genes. Due to the work of the HGNC we always know that we are talking about the same gene! 
+# HW 07: In The Kubernetes
+## Project Description
+To observe & use the dataset provided by the HUGO Gene Nomenclature Committee (HGNC), that holds the unique id & meaningful name for each gene. With this homework we'll utilize Redis via a Flask interface, and the help of kubernetes structures. As such I've implemented PVCs, deployments and services.
 
-As mentioned there are nearly 43,0000 symbols so it can be difficult to search through the data and get the information you need. This project contianerizes a flask application which is deisgned to make it much eaiser to find the needed gene and information. It also creates a base for developers to build upon the application and create interesting projects.   
+## Project Objective
+The purpose of this assignment was to allow us to become more comfortable with the utilization of Redis,Flask, and combination of Docker. Additonally, to allow 
+us to understand the structure behind kubernetes clusters & the flow between PVCs, deployments and service files. As such, we had to create a final product that connected back to our flask & redis application developed in homework six.
+
 ## Data
-The public [data](https://www.genenames.org/download/archive/) used is provided and maintained by HUGO. At the bottom you will find all of the different formats. The one used for this is 'Current JSON format hgnc_complete_set file'. Furthemore, within the /genes/<hgnc_id> route you will find much more detailed information about what the dataset contains.
+The data used with this homework is a JSON file that contains information about the genes found on the human genome. This dataset is regulated by the HGNC, a group that is in charge of naming each gene. This dataset holds the information on every gene that the HGNC has named.
 
-## Important Files
-**gene_api.py**: Flask app containing all of the routes allowing user to make a request and get a response. It also contains the code regarding redis, a noSQL database, which allows us to store the data. This is important so that all the data is stored in the case that the flask application stops.
+As such the data can be found here: (https://www.genenames.org/download/archive/)
 
-**Dockerfile**: Containerizes the gene_api.py application. Containerization is important as it allows the script to function the same despite the host device. It will install the necessary libraries used such as Flask, Redis, JSON, and Python. It also makes it easy to share the application once it has been pushed to Docker Hub.
+## Scripts, Files & Flask Routes:
+`gene_api.py`:
+Is the Flask application that allows us to make queries into the dataset. It aids us in finding specific hgnc_ids & returning the data in a digestible manner.
 
-**docker-compose.yaml**: Makes it much easier to run and stop the entire application. Brlow is the command to launch the application along with redis.  
-```
-$ docker-compose up -d
-```
-Closing the application:
-```
-$ docker-compose down
-```
+
+As such here are the following routes used in the aplication:
+
+| Route         | Method        | Return |
+| ------------- |:-------------:| ------------- |
+| `/data`     | GET | Return all data in Redis database | 
+| | DELETE |  Delete data from Redis database | 
+| | POST | Post data into Redis database | 
+| `/genes`    | GET |  Returns the unique hgnc_id of all the genes in the data set      |
+| `/genes/<hgnc_id>`  | GET |  Return all data associated with a specific hgnc_id |
+
+### Note: 
+<hgnc_id> is a string variable that has the following shape: HGNC:123, where 123 can be any unique ID value as given from the HGNC.
+
+`Dockerfile`: Holds the commands that allow the docker image associated with gene_api, to build the container when ran
+`docker-compose.yml`: YAML script controlling the containerization and port destination of the flask & redis applications
+
 All other files relate to Kubernetes and information about them can be found in the Kubernetes section.
 
 ## Pull and use image from Docker Hub
@@ -116,15 +129,3 @@ spec:
           - name: flask
             containerPort: 5000
 ```
-
-## Usage
-
-Note that if you are not using Kubernetes you will need to modify the gene_api.py file. Within line 18 change host='kebabo-test-redis-service' to host='redis-db'
-
-| Route | Method | Description |
-| --- | --- | --- |
-| `/data` | POST | Store data into redis |
-| | GET | Return all data from redis |
-| | DELETE | Delete all data in redis |
-| `/genes` | GET | Return json-formatted list of all the hgnc_ids |
-| `/genes/<hgnc_id>` | GET | Return all data associated with <hgnc_id> |
