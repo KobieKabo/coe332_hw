@@ -56,7 +56,7 @@ $docker build -t <dockerhubusername>/<script>:<version> .
 ```
 3.Running the image:
 ```
-$docker run -it --rm -p <dockerhubusername>/<script name without the .py>:<version>
+$docker run -it --rm -p <dockerhubusername>/<script>:<version>
 ```   
 ### Pushing the image to DockerHub
 If you wish to push the image to DockerHub:
@@ -113,9 +113,7 @@ kebabo-test-flask-service   ClusterIP   10.233.61.208   <none>        5000/TCP  
 kebabo-test-redis-service   ClusterIP   10.233.27.113   <none>        6379/TCP   41m
 ```
 We are now in the bash of our debug pod where we're able to run curl commands.
-```
 
-```
 ### Notes
 
 If you plan on using your own image and Kubernetes you will need to push the image to dockerhub. Instructions on how to do this are above. You will then need to modify the kebabo-test-flask-deployment.yml file. Replace the value of the image key with your own image.
