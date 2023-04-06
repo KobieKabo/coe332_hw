@@ -102,8 +102,8 @@ py-debug-deployment-f484b4b99-898lt             1/1     Running   0          18m
 ```
 We will now access the bash within the py-debug pod
 ```
-$kubectl exec -it  py-debug-deployment-f484b4b99-t6mvf -- /bin/bash
-root@py-debug-deployment-f484b4b99-t6mvf:/#
+$kubectl exec -it  py-debug-deployment-f484b4b99-898lt -- /bin/bash
+root@py-debug-deployment-f484b4b99-898lt:/#
 ```
 Before we are able to run curl commands to the Flask app we need to get the flask service IP. 
 ```
