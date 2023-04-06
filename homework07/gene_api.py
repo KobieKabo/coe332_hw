@@ -91,7 +91,7 @@ def get_hgnc_data(hgnc_id) -> dict:
     if len(rd.keys()) == 0:
         return 'Database is empty. please re-post the data.\n'
     
-     for key in rd.keys():
+    for key in rd.keys():
         if key.decode('utf-8') == hgnc_id:
             return json.loads(rd.get(key))
 

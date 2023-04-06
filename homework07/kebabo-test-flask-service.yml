@@ -8,11 +8,9 @@ metadata:
     env: test
 spec:
   type: ClusterIP
+  selector:
+    app: kebabo-test-flask-deployment
   ports:
-  - name: http
+  - name: kebabo-test-flask-deployment
     port: 5000
     targetPort: 5000
-  selector:
-    app: kebabo-test-flask
-    username: kebabo
-    env: test
