@@ -126,7 +126,7 @@ spec:
       containers:
         - name: flask-container
           imagePullPolicy: Always
-          image: kobiekabo/gene_api:hw7-1.0
+          image: kobiekabo/gene_api:1.0-hw8
           ports:
           - name: flask
             containerPort: 5000
