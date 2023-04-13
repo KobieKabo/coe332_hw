@@ -1,10 +1,10 @@
-# HW 07: In The Kubernetes
+# HW 08: Holidapp
 ## Project Description
-To observe & use the dataset provided by the HUGO Gene Nomenclature Committee (HGNC), that holds the unique id & meaningful name for each gene. With this homework we'll utilize Redis via a Flask interface, and the help of kubernetes structures. As such I've implemented PVCs, deployments and services.
+To observe & use the dataset provided by the HUGO Gene Nomenclature Committee (HGNC), that holds the unique id & meaningful name for each gene. With this homework we'll utilize Redis via a Flask interface, and the help of kubernetes structures. As such I've implemented PVCs, deployments and services. In addition, we're now utilizing two redis databases at once. One for storing the dataset, and using that database to construct a simple plot, which is then stored and accessed via second database.
 
 ## Project Objective
 The purpose of this assignment was to allow us to become more comfortable with the utilization of Redis,Flask, and combination of Docker. Additonally, to allow 
-us to understand the structure behind kubernetes clusters & the flow between PVCs, deployments and service files. As such, we had to create a final product that connected back to our flask & redis application developed in homework six.
+us to understand the structure behind kubernetes clusters & the flow between PVCs, deployments and service files. As such, we had to create a final product that connected back to our flask & redis application developed in homework six. Additionall,y it was to further demonstrate the potential interconnectivity between programs, datasets & databases by utilizing two redis databases at once.
 
 ## Data
 The data used with this homework is a JSON file that contains information about the genes found on the human genome. This dataset is regulated by the HGNC, a group that is in charge of naming each gene. This dataset holds the information on every gene that the HGNC has named.
@@ -25,6 +25,9 @@ As such here are the following routes used in the aplication:
 | | POST | Post data into Redis database | 
 | `/genes`    | GET |  Returns the unique hgnc_id of all the genes in the data set      |
 | `/genes/<hgnc_id>`  | GET |  Return all data associated with a specific hgnc_id |
+|`/image`    | GET | Returns plot file from Redis_image database|
+| | DELETE |  Deletes plot from Redis_image database | 
+| | POST | Posts plot into Redis_image database | 
 
 ### Note: 
 <hgnc_id> is a string variable that has the following shape: HGNC:123, where 123 can be any unique ID value as given from the HGNC.
