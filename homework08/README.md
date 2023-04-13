@@ -36,6 +36,8 @@ As such here are the following routes used in the aplication:
 
 `docker-compose.yml`: YAML script controlling the containerization and port destination of the flask & redis applications
 
+Using the `/image GET` requires a special curl command: as such: `/image -X GET >> <FILE_NAME>`
+
 All other files relate to Kubernetes and information about them can be found in the Kubernetes section.
 
 ## Pull and use image from Docker Hub
